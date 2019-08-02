@@ -1,0 +1,11 @@
+GET https://api.exchangeratesapi.io/latest
+###
+
+
+GET https://api.exchangeratesapi.io/latest?base=USD
+
+###
+
+GET https://api.exchangeratesapi.io/latest?symbols=RUB&base=USD
+
+###

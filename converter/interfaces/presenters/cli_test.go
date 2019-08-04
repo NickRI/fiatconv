@@ -72,7 +72,8 @@ func TestCli_Error(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewCli(writerMock)
 			tt.before(&tt.args)
-			if err := c.Error(tt.args.ctx, tt.args.err); err != nil && !xerrors.Is(err, tt.wantErr) {
+			err := c.Error(tt.args.ctx, tt.args.err)
+			if err != nil && !xerrors.Is(err, tt.wantErr) || tt.wantErr != nil && err == nil {
 				t.Errorf("Error() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
@@ -134,7 +135,8 @@ func TestCli_Present(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewCli(writerMock)
 			tt.before(&tt.args)
-			if err := c.Present(tt.args.ctx, tt.args.src, tt.args.dst, tt.args.in, tt.args.conv); err != nil && !xerrors.Is(err, tt.wantErr) {
+			err := c.Present(tt.args.ctx, tt.args.src, tt.args.dst, tt.args.in, tt.args.conv)
+			if err != nil && !xerrors.Is(err, tt.wantErr) || tt.wantErr != nil && err == nil {
 				t.Errorf("Present() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

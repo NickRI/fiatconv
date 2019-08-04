@@ -105,7 +105,7 @@ func TestBaseInteractor_Convert(t *testing.T) {
 			ex := NewBaseInteractor(repoMock)
 			tt.before(&tt.args)
 			got, err := ex.Convert(tt.args.ctx, tt.args.src, tt.args.dst, tt.args.amount)
-			if err != nil && !xerrors.Is(err, tt.wantErr) {
+			if err != nil && !xerrors.Is(err, tt.wantErr) || tt.wantErr != nil && err == nil {
 				t.Errorf("Convert() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

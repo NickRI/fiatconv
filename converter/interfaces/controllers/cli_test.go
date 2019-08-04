@@ -111,7 +111,8 @@ func TestCli_Convert(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewCli(mockInterator, mockPresenter)
 			tt.before(&tt.args)
-			if err := c.Convert(tt.args.ctx, tt.args.args); err != nil && err.Error() != tt.wantErr.Error() {
+			err := c.Convert(tt.args.ctx, tt.args.args)
+			if err != nil && err.Error() != tt.wantErr.Error() || tt.wantErr != nil && err == nil {
 				t.Errorf("Convert() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

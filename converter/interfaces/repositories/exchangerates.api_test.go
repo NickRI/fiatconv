@@ -62,7 +62,7 @@ func TestRestapiRepo_GetItemPrice(t *testing.T) {
 			r := NewRestapiRepo(clientMock)
 			tt.before(&tt.args)
 			got, err := r.GetItemPrice(tt.args.ctx, tt.args.src, tt.args.dst)
-			if err != nil && !xerrors.Is(err, tt.wantErr) {
+			if err != nil && !xerrors.Is(err, tt.wantErr) || tt.wantErr != nil && err == nil {
 				t.Errorf("GetItemPrice() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

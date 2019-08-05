@@ -3,10 +3,9 @@ package usecases
 import (
 	"context"
 
-	"golang.org/x/xerrors"
-
 	"github.com/NickRI/fiatconv/converter/domain/entries"
 	"github.com/NickRI/fiatconv/converter/interfaces/repositories"
+	"golang.org/x/xerrors"
 )
 
 type BaseInteractor struct {

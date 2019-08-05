@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"os"
+	"time"
 
 	"github.com/NickRI/fiatconv/converter/interfaces/presenters"
 
@@ -16,8 +17,12 @@ import (
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 
+	inMemCache := external.NewInMemCache()
+
 	remoteRepo := repositories.NewRestapiRepo(external.NewExchangeRatesClient())
-	intrerator := usecases.NewBaseInteractor(remoteRepo)
+	cachedRepo := repositories.NewCachedRepo(remoteRepo, inMemCache, time.Second*5)
+
+	intrerator := usecases.NewBaseInteractor(cachedRepo)
 	presenter := presenters.NewCli(os.Stdout)
 
 	console := controllers.NewCli(intrerator, presenter)
